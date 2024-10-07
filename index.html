@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<center>
+  <div class="container">
+    <div class="temperature-icon">
+      <img src="images/i3.jfif" alt="Temperature Icon">
+    </div>
+    <div class="hi"><h2>Temperature Converter</h2></div>
+    <input type="text" id="tempInput" placeholder="Enter temperature">
+    <select id="unitInput">
+      <option value="Celsius">Celsius</option>
+      <option value="Fahrenheit">Fahrenheit</option>
+      <option value="Kelvin">Kelvin</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <div class="result" id="result"></div>
+  </div>
+</center>
+  <script>
+    function convertTemperature() {
+      const tempInput = document.getElementById('tempInput').value;
+      const unitInput = document.getElementById('unitInput').value;
+      const resultDiv = document.getElementById('result');
+      
+      // Check if the input is a number
+      if (isNaN(tempInput)) {
+        resultDiv.innerHTML = "Please enter a valid number.";
+        return;
+      }
+
+      const temp = parseFloat(tempInput);
+      let result = "";
+
+      // Conversion logic
+      if (unitInput === "Celsius") {
+        const fahrenheit = (temp * 9/5) + 32;
+        const kelvin = temp + 273.15;
+        result = `${temp}°C = ${fahrenheit.toFixed(2)}°F = ${kelvin.toFixed(2)}K`;
+      } else if (unitInput === "Fahrenheit") {
+        const celsius = (temp - 32) * 5/9;
+        const kelvin = (temp - 32) * 5/9 + 273.15;
+        result = `${temp}°F = ${celsius.toFixed(2)}°C = ${kelvin.toFixed(2)}K`;
+      } else if (unitInput === "Kelvin") {
+        const celsius = temp - 273.15;
+        const fahrenheit = (temp - 273.15) * 9/5 + 32;
+        result = `${temp}K = ${celsius.toFixed(2)}°C = ${fahrenheit.toFixed(2)}°F`;
+      }
+
+      resultDiv.innerHTML = result;
+    }
+  </script>
+
+</body>
+</html>
